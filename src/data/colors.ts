@@ -1,0 +1,1 @@
+export const cardColors = ["#FF9B73","#F8C36E","#2CB5A5","#76C8F0", "#E97F87","#FFB584"] as const;
