@@ -58,7 +58,7 @@ export const POST = async (request: NextRequest) => {
 
 
     const parts = [
-        { text: "YOU CAN REPLY IN A DETAILED RESPONSE ONLY. DO NOT INCLUDE MARKDOWN OR ANYTHING IN THE RESPONSE. INCLUDE ONLY PLAIN TEXT IN THE RESPONSE. SEND ME A SHORT EXPLANATION OF THE LECTURE NOTE OF THE IMAGE I SEND YOU.\n\n" },
+        { text: "YOU CAN REPLY IN A DETAILED RESPONSE ONLY. SEND ME A SHORT EXPLANATION OF THE LECTURE NOTE OF THE IMAGE I SEND YOU. \n\n" },
         { inlineData: { mimeType: "image/png", data: base64Image } },
     ];
 
@@ -74,7 +74,7 @@ export const POST = async (request: NextRequest) => {
 
         return NextResponse.json({
             status: "success",
-            error: response.text()
+            data: response.text()
         }, {
             status: 200
         })
