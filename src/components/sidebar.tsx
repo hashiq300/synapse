@@ -68,7 +68,7 @@ const Sidebar = () => {
     <motion.nav
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className="h-[100vh] flex flex-col items-center justify-between bg-white py-12 transition-all"
+      className="h-[100vh] flex flex-col items-center justify-between bg-white py-12 transition-all z-10 fixed"
       initial={false}
       animate={isSidebarActive ? "expanded" : "collapsed"}
       variants={sidebarVariants}
