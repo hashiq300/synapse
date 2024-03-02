@@ -84,6 +84,7 @@ const Sidebar = () => {
             return (
               <Link
                 href={link.path}
+                key={link.name}
                 className={cn(
                   "w-fit h-fit flex gap-2 p-3 px-5 rounded-full items-center justify-center hover:shadow-link",
                   isSideTabActive(link.path) && "bg-primary shadow-link"
