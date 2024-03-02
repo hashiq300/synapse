@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Pen, Palette, Trash2, Bookmark } from "lucide-react";
 import { cardColors } from "@/data/colors";
+import Link from "next/link";
+import { deleteNote } from "@/actions/deleteNote";
 
 type NoteCardProps = {
   date: string;
@@ -21,13 +23,18 @@ const NoteCard = ({ date, title, id, color }: NoteCardProps) => {
     setBackgroundColor(cardColors[randomIndex]);
   };
 
+  const handleDelete = async () => {
+    await deleteNote(id);
+  }
+
+
   const variants = {
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
     hidden: { opacity: 0, y: 20, transition: { duration: 0.5 } },
   };
 
   return (
-    <div 
+    <Link href={`/note/preview/${id}`} 
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{ backgroundColor: backgroundColor }} 
@@ -47,18 +54,18 @@ const NoteCard = ({ date, title, id, color }: NoteCardProps) => {
           <button onClick={handleColorChange}>
             <Palette size={20} strokeWidth={1} />
           </button>
-          <button>
+          <button onClick={handleDelete}>
             <Trash2 size={20} strokeWidth={1} />
           </button>
           <button>
             <Bookmark size={20} strokeWidth={1} />
           </button>
         </div>
-        <button className="p-2 rounded-full bg-white">
+        <Link suppressHydrationWarning href={`/note/edit/${id}`} className="p-2 rounded-full bg-white">
           <Pen size={20} color="#000" />
-        </button>
+        </Link>
       </motion.div>
-    </div>
+    </Link>
   );
 };
 

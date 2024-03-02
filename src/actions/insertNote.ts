@@ -6,6 +6,7 @@ import { noteSchema } from "@/lib/validation"
 import { users } from "@/schema/auth"
 import { notes } from "@/schema/note"
 import crypto from "crypto"
+import { revalidatePath } from "next/cache"
 
 export const insertNote = async (data: FormData) => {
     const dataObj = Object.fromEntries(data)
@@ -45,6 +46,8 @@ export const insertNote = async (data: FormData) => {
         createdAt: new Date(),
         updatedAt: new Date()
     }).returning({ id: notes.id })
+
+    revalidatePath("/")
 
     return {
         data: note[0].id,

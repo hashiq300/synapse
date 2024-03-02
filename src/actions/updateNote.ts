@@ -5,6 +5,7 @@ import { db } from "@/lib/db"
 import { noteSchema, updateNoteSchema, updateTitleSchema } from "@/lib/validation"
 import { notes } from "@/schema/note"
 import { and, eq } from "drizzle-orm"
+import { revalidatePath } from "next/cache"
 
 
 export const updateTitle = async (data: FormData) => {
@@ -49,6 +50,8 @@ export const updateTitle = async (data: FormData) => {
             error: "Note not found"
         }
     }
+
+    revalidatePath("/")
     return {
         data: note[0].id,
         error: null
@@ -97,6 +100,8 @@ export const updateNote = async (data: FormData) => {
             error: "Note not found"
         }
     }
+
+    revalidatePath("/")
     return {
         data: note[0].id,
         error: null
