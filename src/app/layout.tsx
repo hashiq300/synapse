@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import "@uploadthing/react/styles.css";
+import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster"
 
 
@@ -17,9 +18,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
+  return (  
     <html suppressHydrationWarning={true} lang="en">
-      <body className={poppins.className}>{children}</body>
+      <body className={cn(poppins.className, "overflow-x-hidden")}>{children}</body>
       <Toaster/>
     </html>
   );
