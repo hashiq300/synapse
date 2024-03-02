@@ -20,7 +20,6 @@ const NoteWithIdPage = async ({ params }: { params: { id: string } }) => {
     <div className="max-w-[80%] pl-16 pt-12 h-screen overflow-y-auto hide_scrollbarbar">
       <NoteBody userNote={note[0]} type="edit" />
     </div>
-
   )
 }
 
