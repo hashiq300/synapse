@@ -76,7 +76,7 @@ const Sidebar = () => {
     >
       <div className="flex flex-col gap-24">
         <Link href="/">
-          <Image src="icons/logo.svg" alt="logo" width={48} height={48} />
+          <Image src="/icons/logo.svg" alt="logo" width={48} height={48} />
         </Link>
 
         <div className="flex flex-col gap-5">

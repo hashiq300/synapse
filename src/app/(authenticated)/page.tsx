@@ -12,7 +12,7 @@ export default function Home() {
       <div className="flex-[2.5] p-14 h-screen overflow-y-auto hide_scrollbar">
         <SearchBar />
         <div className="flex justify-between mt-14">
-          <TakeNote href="/add-note" title="Take a note" icon={<Calendar size={20} color='#1A1A1A'/>}/>
+          <TakeNote href="/note/edit" title="Take a note" icon={<Calendar size={20} color='#1A1A1A' />} />
           <TakeNote href="/image-note" title="Upload a picture" icon={<Image size={20} color='#1A1A1A'/>}/>
           <TakeNote href="/add-note" title="Draw something" icon={<Brush size={20} color='#1A1A1A'/>}/>
         </div>
