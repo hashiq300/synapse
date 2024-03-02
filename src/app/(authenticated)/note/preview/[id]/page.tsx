@@ -12,8 +12,8 @@ const PreviewPage = async ({ params }: { params: { id: string } }) => {
 
     return (
         <div className="ml-12 mt-12 w-[75vw] h-screen overflow-y-auto hide_scrollbar">
-            <PreviewHeader id={note[0].id} title={note[0].title} />
-            <PreviewBody note={note[0].note} />
+            <PreviewHeader id={note[0]?.id} title={note[0]?.title} />
+            <PreviewBody note={note[0]?.note} />
         </div>
     )
 }
