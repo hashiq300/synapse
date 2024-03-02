@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const TakeNote = () => {
   return (
-    <Link href="/note/add">
+    <Link href="/note/edit">
       <div className='w-[290px] h-fit flex items-center gap-7 bg-white px-6 py-3 rounded-2xl shadow-link'>
         <div className=' bg-primary w-fit rounded-full p-3'>
             <Calendar size={20} color='#1A1A1A'/>
