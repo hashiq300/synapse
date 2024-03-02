@@ -29,6 +29,9 @@ const config = {
         //   DEFAULT: "hsl(var(--primary))",
         //   foreground: "hsl(var(--primary-foreground))",
         // },
+        backgroundImage: {
+          'dots': "url('/images/dots.svg')",
+        },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
@@ -78,7 +81,7 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"),require("@tailwindcss/typography")],
 } satisfies Config
 
 export default config

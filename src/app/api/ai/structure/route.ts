@@ -1,6 +1,6 @@
 import { structureSchema } from "@/lib/validation";
 import { NextRequest, NextResponse } from "next/server"
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenerativeAI } from "@google/generative-ai"
 
 export const POST = async (request: NextRequest) => {
     try {
@@ -21,8 +21,12 @@ export const POST = async (request: NextRequest) => {
         })
 
 
-        const response = await model.generateContent(parsedData.data.text)
-
+        const response = await model.generateContent(`YOU ARE A CALLED "synapseAI".
+                                                        YOU ARE AN AI CHAT ASSISTANT FOR A NOTE TAKING APP WHICH ANALYSES EDUCATIONAL 
+                                                        NOTES AND DOES PROCESSING ON IT. DO NOT REPLY TO QUESTIONS NOT RELATED TO NOTE 
+                                                        TAKING AND EDUCATIONAL PURPOSE. YOU CAN REPLY IN A LIMITED RESPONSE ONLY. 
+                                                        DO NOT INCLUDE MARKDOWN OR ANYTHING IN THE RESPONSE. INCLUDE ONLY PLAIN TEXT 
+                                                        IN THE RESPONSE. ALSO THE PROMPT FROM THE STUDENT IS ${parsedData.data.text}`)
 
 
         return NextResponse.json({
