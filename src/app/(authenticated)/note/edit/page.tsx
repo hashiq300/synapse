@@ -5,7 +5,7 @@ import TitleInput from "./_components/TitleInput"
 const NoteAddPage = () => {
 
     return (
-        <div className="max-w-[80%] pl-16 pt-12 h-screen overflow-y-auto no-scrollbar">
+        <div className="max-w-[80%] pl-16 pt-12 h-screen overflow-y-auto hide_scrollbarbar">
             <NoteBody type="new" />
         </div>
     )
