@@ -9,6 +9,7 @@ import { insertNote } from "@/actions/insertNote";
 import { updateNote, updateTitle } from "@/actions/updateNote";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useToast } from "@/components/ui/use-toast"
 
 type TitleInputProps = {
     note: string;
@@ -34,6 +35,7 @@ const TitleInput = ({
     const [title, setTitle] = useState(defaultTitle ?? "Untitled Note")
     const [isEditable, setIsEditable] = useState(false);
     const router = useRouter()
+    const { toast } = useToast()
 
     const btnStyle = "inline-flex justify-center items-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
 
@@ -52,6 +54,10 @@ const TitleInput = ({
 
             } else {
                 router.replace(`/note/edit/${res.data}`)
+                toast({
+                    title:"Note created",
+                    description:"Your note has been created",
+                })
             }
         } else if (id) {
             console.log("updating note")
@@ -82,7 +88,13 @@ const TitleInput = ({
 
         console.log("note is:", note)
         if (type === "new") {
+            toast({
+                title: "Creating note",            
+            })
             const res = await insertNote(formData)
+            toast({
+                title: "Successfully created note",            
+            })
             if (res.error) {
                 console.log("error inserting note")
 
@@ -90,16 +102,20 @@ const TitleInput = ({
                 router.replace(`/note/edit/${res.data}`)
             }
         } else if (id) {
+            toast({
+                title: "Saving note",            
+            })
             formData.append("id", id)
             const res = await updateNote(formData)
+            toast({
+                title: "Saved note",            
+            })
             if (res.error) {
                 console.log("error updating note")
             } else {
                 router.replace(`/note/edit/${res.data}`)
             }
         }
-
-
         setAllDisabled(false)
     }
 
@@ -130,7 +146,13 @@ const TitleInput = ({
                     }
                 } else if (id) {
                     formData.append("id", id)
+                    toast({
+                        title: "saving note",            
+                    })
                     const res = await updateNote(formData)
+                    toast({
+                        title: "Updated",            
+                    })
                     if (res.error) {
                         console.log("error updating note")
                     } else {

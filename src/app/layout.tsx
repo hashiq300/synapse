@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import "@uploadthing/react/styles.css";
+import { Toaster } from "@/components/ui/toaster"
 
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400"] });
@@ -17,8 +18,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html suppressHydrationWarning={true} lang="en">
       <body className={poppins.className}>{children}</body>
+      <Toaster/>
     </html>
   );
 }
