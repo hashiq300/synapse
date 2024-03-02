@@ -1,12 +1,13 @@
 import React from 'react'
-import Image from 'next/image'
 import { auth } from '@/lib/auth'
+// import Image from 'next/image'
 
 const User = async () => {
+  const session = await auth()
   return (
     <div className='h-fit flex items-center gap-5'>
-        <p className='text-[#1A1A1A] font-normal text-xl'>{"Antony Jaison"}</p>
-        <Image src="/images/avatar.png" alt="Picture of the author" width={50} height={50} />
+        <p className='text-[#1A1A1A] font-normal text-xl'>{session?.user?.name}</p>
+        <img className='rounded-full w-[50px] h-[50px]' src={session?.user?.image} alt="Picture of the author" />
     </div>
   )
 }

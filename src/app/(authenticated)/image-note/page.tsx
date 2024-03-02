@@ -1,11 +1,11 @@
 "use client";
 
-import Dropzone from "@/components/dropzone";
 import axios from "axios";
 import React, { useState } from "react";
 import { UploadDropzone } from "@/utils/uploadthing";
 import Image from "next/image";
 import { Loader2 } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 type ImageType = {
   key: string;
@@ -17,7 +17,7 @@ type ImageType = {
 const page = () => {
   const [isGeneratingNote, setIsGeneratingNote] = useState<boolean>(false);
   const [generatedNote, setGeneratedNote] = useState<string>("");
-  const [error, setError] = useState<string>("")
+  const [error, setError] = useState<string>("");
   const [image, setImage] = useState<ImageType>({
     key: "",
     name: "",
@@ -25,14 +25,26 @@ const page = () => {
     url: "",
   });
 
+  const { toast } = useToast();
+
   const handleSubmitImage = () => {
     setIsGeneratingNote(true);
     axios
       .post("/api/ai/vision", {
         imageUrl: image.url,
       })
-      .then((res) => setGeneratedNote(res.data.data))
-      .catch((err) => setError(err.message))
+      .then((res) => {
+        setGeneratedNote(res.data.data);
+        toast({
+          title: "Notes generated",
+        });
+      })
+      .catch((err) => {
+        setError(err.message);
+        toast({
+          title: err.message,
+        });
+      })
       .finally(() => setIsGeneratingNote(false));
   };
 
@@ -54,6 +66,9 @@ const page = () => {
           endpoint="imageUploader"
           onClientUploadComplete={(res) => {
             console.log("Files: ", res);
+            toast({
+              title: "Image uploaded",
+            });
             setImage({
               key: res[0].key,
               name: res[0].name,
@@ -63,7 +78,10 @@ const page = () => {
           }}
           onUploadError={(error: Error) => {
             alert(`ERROR! ${error.message}`);
-            setError(error.message)
+            setError(error.message);
+            toast({
+              title: "Error occured",
+            });
           }}
         />
       )}
@@ -82,13 +100,12 @@ const page = () => {
             className="bg-[#FF9B73] text-white p-3 px-5 rounded-xl min-w-[200px] flex justify-center"
           >
             {isGeneratingNote ? (
-                <div className="h-fit flex items-center gap-4">
-                    <p>Generating note...</p>
-                    <div className="animate-spin">
-                        <Loader2 size={30} />
-                    </div>
+              <div className="h-fit flex items-center gap-4">
+                <p>Generating note...</p>
+                <div className="animate-spin">
+                  <Loader2 size={30} />
                 </div>
-
+              </div>
             ) : (
               "Generate Note"
             )}

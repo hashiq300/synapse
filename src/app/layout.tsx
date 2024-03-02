@@ -3,6 +3,7 @@ import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import "@uploadthing/react/styles.css";
 import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/toaster"
 
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400"] });
@@ -17,9 +18,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
+  return (  
+    <html suppressHydrationWarning={true} lang="en">
       <body className={cn(poppins.className, "overflow-x-hidden")}>{children}</body>
+      <Toaster/>
     </html>
   );
 }
